@@ -1,37 +1,39 @@
 # agent-skills-template
 
-Claude Code / Codex の**両方**に skills を公開する plugin marketplace リポジトリの
-サンプル & テンプレート。
+A sample & template repository for publishing agent skills to **both Claude Code
+and Codex** from a single source.
 
-## ポイント
+日本語版: [README.ja.md](README.ja.md)
 
-- **skills 正本は `skills/` 一箇所** — 各 plugin へは相対 symbolic link で公開
-  (二重管理しない)
-- `.claude-plugin/` + `.agents/plugins/` の 2 つの marketplace index で
-  Claude Code / Codex 両対応
-- 「このようなリポジトリを作る」ための skill
+## Key ideas
+
+- **Single source of truth** — skill bodies live in `skills/` only; each plugin
+  exposes them via relative symbolic links (no duplication)
+- Dual marketplace indexes (`.claude-plugin/` + `.agents/plugins/`) make the
+  repo installable from both Claude Code and Codex
+- Ships a skill that teaches an agent **how to build a repository like this one**
   ([skills/create-skills-marketplace](skills/create-skills-marketplace/SKILL.md))
-  を同梱。agent にこの skill を読ませればこの構成を再現できる
 
-## 構成
+## Layout
 
 ```
-├── skills/                          # ★ skills の正本
-│   ├── hello/                       #   install 確認用の最小 skill
-│   └── create-skills-marketplace/   #   この構成の repo を作るための skill
+├── skills/                          # ★ skill bodies (single source of truth)
+│   ├── hello/                       #   minimal skill to verify installation
+│   └── create-skills-marketplace/   #   skill to scaffold a repo like this one
 ├── plugins/example/
-│   ├── .claude-plugin/plugin.json   # Claude Code 用
-│   ├── .codex-plugin/plugin.json    # Codex 用
-│   └── skills/*                     # → ../../skills/* への symlink
+│   ├── .claude-plugin/plugin.json   # Claude Code plugin definition
+│   ├── .codex-plugin/plugin.json    # Codex plugin definition
+│   ├── commands/                    # (optional) Claude Code slash-command wrappers
+│   └── skills/*                     # → symlinks to ../../skills/*
 ├── .claude-plugin/marketplace.json  # Claude Code marketplace index
 ├── .agents/plugins/marketplace.json # Codex marketplace index
 ├── AGENTS.md / CLAUDE.md (symlink)
 └── docs/installation.md
 ```
 
-## インストール
+## Install
 
-[docs/installation.md](docs/installation.md) を参照。
+See [docs/installation.md](docs/installation.md).
 
 ```
 # Claude Code
@@ -43,7 +45,14 @@ codex plugin marketplace add n-seiji/agent-skills-template
 codex plugin install example
 ```
 
-## このテンプレートから新しいリポジトリを作る
+## Create your own
 
-GitHub の "Use this template" を使うか、agent に
-`skills/create-skills-marketplace/SKILL.md` を読ませて scaffold させる。
+Use GitHub's **"Use this template"** button, or let your agent read
+[skills/create-skills-marketplace/SKILL.md](skills/create-skills-marketplace/SKILL.md)
+and scaffold the structure for you.
+
+⭐ **If you build a repository based on this template, please star this repo!**
+
+## License
+
+MIT

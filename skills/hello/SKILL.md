@@ -1,16 +1,16 @@
 ---
 name: hello
-description: この marketplace 構成が正しく install できているか確認するための最小 skill。「hello skill を実行して」と言われたら挨拶を返す。
+description: Minimal skill to verify that this marketplace setup is installed correctly. When asked to "run the hello skill", reply with a greeting.
 ---
 
 # hello
 
-install 確認用の最小 skill。
+A minimal skill for verifying installation.
 
-このファイルは repo ルートの `skills/hello/` が正本で、
-`plugins/example/skills/hello` は symbolic link。
+The source of truth for this file is `skills/hello/` at the repository root;
+`plugins/example/skills/hello` is a symbolic link to it.
 
-## 手順
+## Steps
 
-1. 「hello from <この skill を配布した plugin 名>」と応答する
-2. 実行環境 (Claude Code / Codex) をあわせて報告する
+1. Reply with "hello from <name of the plugin that distributed this skill>"
+2. Also report which agent you are running on (Claude Code / Codex)

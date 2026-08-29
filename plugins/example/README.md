@@ -1,6 +1,7 @@
 # example plugin
 
-このテンプレートのサンプル plugin。`skills/` は repo ルート `skills/` への symbolic link。
+The sample plugin of this template. Everything under `skills/` here is a
+symbolic link to the repository-root `skills/` directory (single source of truth).
 
-- `hello` — install 確認用
-- `create-skills-marketplace` — この構成のリポジトリを新規に作るための skill
+- `hello` — verify installation
+- `create-skills-marketplace` — scaffold a new repository with this structure

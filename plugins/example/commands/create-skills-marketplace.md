@@ -1,11 +1,11 @@
 ---
-description: Claude Code / Codex 両対応の skills 配布 marketplace リポジトリを scaffold する
-argument-hint: <repo 名や配布したい skill の説明 | 空>
+description: Scaffold a skills-distribution marketplace repository that works with both Claude Code and Codex
+argument-hint: <repo name or description of the skills to distribute | empty>
 ---
 
-`create-skills-marketplace` skill を読み込み、その構成・手順・チェックリストに従って
-skills 配布リポジトリを scaffold してください。
+Load the `create-skills-marketplace` skill and follow its layout, scaffold
+steps, and checklist to build the repository.
 
-## 入力
+## Input
 
 $ARGUMENTS
