@@ -1,0 +1,19 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "agent-skills-template のサンプル plugin",
+  "author": {
+    "name": "n-seiji"
+  },
+  "repository": "https://github.com/n-seiji/agent-skills-template",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "example (agent-skills-template)",
+    "shortDescription": "skills 配布 repo テンプレートのサンプル plugin",
+    "longDescription": "Claude Code / Codex 両対応の skills 配布リポジトリ構成を示すサンプル plugin。install 確認用の hello と、同構成のリポジトリを scaffold する create-skills-marketplace を含む。",
+    "developerName": "n-seiji",
+    "category": "Productivity",
+    "defaultPrompt": "create-skills-marketplace skill に従って、skills 配布用 marketplace リポジトリを scaffold してください。",
+    "capabilities": ["Read", "Write"]
+  }
+}

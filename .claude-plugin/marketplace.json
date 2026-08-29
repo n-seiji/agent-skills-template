@@ -1,0 +1,14 @@
+{
+  "name": "agent-skills-template",
+  "owner": {
+    "name": "n-seiji",
+    "url": "https://github.com/n-seiji"
+  },
+  "plugins": [
+    {
+      "name": "example",
+      "source": "./plugins/example",
+      "description": "サンプル plugin。hello (install 確認) と create-skills-marketplace (この構成の repo を作る skill) を配布"
+    }
+  ]
+}
