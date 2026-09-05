@@ -17,14 +17,14 @@ English: [README.md](README.md)
 ## 構成
 
 ```
-├── skills/                          # ★ skills の正本 (single source of truth)
+├── skills/                          # 発見用 symlink → plugins/example/skills/*
 │   ├── hello -> ../plugins/example/skills/hello
-│   └── create-skills-marketplace/   #   この構成の repo を作るための skill
+│   └── create-skills-marketplace -> ../plugins/example/skills/create-skills-marketplace
 ├── plugins/example/
 │   ├── .claude-plugin/plugin.json   # Claude Code 用
 │   ├── .codex-plugin/plugin.json    # Codex 用
 │   ├── commands/                    # (任意) Claude Code の slash command wrapper
-│   └── skills/*                     # → ../../skills/* への symlink
+│   └── skills/*                     # ★ skill の実体 (real files)
 ├── .claude-plugin/marketplace.json  # Claude Code marketplace index
 ├── .agents/plugins/marketplace.json # Codex marketplace index
 ├── AGENTS.md / CLAUDE.md (symlink)
