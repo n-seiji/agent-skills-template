@@ -7,8 +7,7 @@ English: [README.md](README.md)
 
 ## ポイント
 
-- **skills 正本は `skills/` 一箇所** — 各 plugin へは相対 symbolic link で公開
-  (二重管理しない)
+- **skill の実体は plugin 配下** (Codex の installer が symlink を実体化しないため)。repo ルートの `skills/` は発見用の symlink (二重管理しない)
 - `.claude-plugin/` + `.agents/plugins/` の 2 つの marketplace index で
   Claude Code / Codex 両対応
 - 「このようなリポジトリを作る」ための skill
@@ -19,7 +18,7 @@ English: [README.md](README.md)
 
 ```
 ├── skills/                          # ★ skills の正本 (single source of truth)
-│   ├── hello/                       #   install 確認用の最小 skill
+│   ├── hello -> ../plugins/example/skills/hello
 │   └── create-skills-marketplace/   #   この構成の repo を作るための skill
 ├── plugins/example/
 │   ├── .claude-plugin/plugin.json   # Claude Code 用

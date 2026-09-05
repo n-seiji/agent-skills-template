@@ -7,8 +7,7 @@ and Codex** from a single source.
 
 ## Key ideas
 
-- **Single source of truth** — skill bodies live in `skills/` only; each plugin
-  exposes them via relative symbolic links (no duplication)
+- **Single source of truth** — canonical skill bodies live inside the plugin; the repo-root `skills/` holds discovery symlinks. (Codex's plugin installer does not materialize symlinks, so the real files must be on the plugin side)
 - Dual marketplace indexes (`.claude-plugin/` + `.agents/plugins/`) make the
   repo installable from both Claude Code and Codex
 - Ships a skill that teaches an agent **how to build a repository like this one**
@@ -17,14 +16,14 @@ and Codex** from a single source.
 ## Layout
 
 ```
-├── skills/                          # ★ skill bodies (single source of truth)
+├── skills/                          # ★ symlinks to plugin skills (canonical lives in the plugin)
 │   ├── hello/                       #   minimal skill to verify installation
 │   └── create-skills-marketplace/   #   skill to scaffold a repo like this one
 ├── plugins/example/
 │   ├── .claude-plugin/plugin.json   # Claude Code plugin definition
 │   ├── .codex-plugin/plugin.json    # Codex plugin definition
 │   ├── commands/                    # (optional) Claude Code slash-command wrappers
-│   └── skills/*                     # → symlinks to ../../skills/*
+│   └── skills/*                     # ★ canonical skill bodies (real files)
 ├── .claude-plugin/marketplace.json  # Claude Code marketplace index
 ├── .agents/plugins/marketplace.json # Codex marketplace index
 ├── AGENTS.md / CLAUDE.md (symlink)

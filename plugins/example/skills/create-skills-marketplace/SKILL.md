@@ -14,13 +14,13 @@ is itself the finished example.
 
 ```
 <repo>/
-├── skills/                          # ★ skill bodies (single source of truth)
-│   └── <skill-name>/SKILL.md        #    frontmatter: name / description required
+├── skills/                          # discovery symlinks → plugins/<p>/skills/*
+│   └── <skill-name> -> ../plugins/<p>/skills/<skill-name>
 ├── plugins/<plugin-name>/
 │   ├── .claude-plugin/plugin.json   # Claude Code plugin definition
 │   ├── .codex-plugin/plugin.json    # Codex plugin definition ("skills": "./skills/")
 │   ├── commands/<name>.md           # (optional) Claude Code slash command; thin wrapper over a skill
-│   ├── skills/<skill-name>          # → symlink to ../../../skills/<skill-name>
+│   ├── skills/<skill-name>/SKILL.md # ★ canonical skill body (real file)
 │   └── README.md
 ├── .claude-plugin/marketplace.json  # Claude Code marketplace index
 ├── .agents/plugins/marketplace.json # Codex marketplace index
@@ -32,10 +32,9 @@ is itself the finished example.
 
 ## Design principles
 
-1. **Skill bodies live only in `skills/`.** Plugins expose them via relative
-   symbolic links. Multiple plugins can distribute the same skill with no
+1. **Canonical skill bodies live inside a plugin** (e.g. `plugins/<p>/skills/<name>`). The repo-root `skills/` directory holds relative symlinks for discovery. This direction matters: Codex's plugin installer copies the plugin directory without materializing symlinks, so a symlink on the plugin side ships an empty skill. Multiple plugins can still share one skill with no
    duplicated content.
-2. Symlinks must be **repo-relative paths** (`../../../skills/<name>`).
+2. Symlinks must be **repo-relative paths** (`../plugins/<p>/skills/<name>`).
    Absolute paths break after clone.
 3. Write skill bodies agent-agnostically. Claude Code specific invocation
    belongs in `commands/` (slash-command wrappers).
@@ -45,10 +44,10 @@ is itself the finished example.
 ## Scaffold steps
 
 1. Create the repository and the directory tree above
-2. Write `skills/<name>/SKILL.md` (frontmatter `name` / `description` required;
+2. Write `plugins/<plugin>/skills/<name>/SKILL.md` (frontmatter `name` / `description` required;
    the description must make it clear *when* to use the skill)
-3. Link each skill from the plugin:
-   `ln -s ../../../skills/<name> plugins/<plugin>/skills/<name>`
+3. Link each skill from the repo root for discovery:
+   `ln -s ../plugins/<plugin>/skills/<name> skills/<name>` (root-side symlink; the plugin side is real files)
 4. Write the plugin definitions:
    - `.claude-plugin/plugin.json`: `{name, version, description, author}`
    - `.codex-plugin/plugin.json`: the above + `"skills": "./skills/"` + `repository` + `interface`
@@ -73,7 +72,7 @@ codex plugin install <plugin>
 
 ## Checklist
 
-- [ ] Skill bodies exist only under `skills/`; plugin side is symlinks only
+- [ ] Canonical skill bodies are real files under the plugin; repo-root `skills/` is symlinks only (verify with `codex plugin add` that skills are non-empty)
 - [ ] Symlinks are relative and resolve right after `git clone` (verify with `cat`)
 - [ ] Every SKILL.md has frontmatter (name / description)
 - [ ] `.claude-plugin` / `.codex-plugin` / both marketplace indexes are present
